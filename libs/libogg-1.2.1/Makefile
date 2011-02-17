@@ -25,7 +25,7 @@ endif
 #---------------------------------------------------------------------------------
 
 DEPSDIR		 = .
-DEFINCS		:= -I$(BASEDIR) -I$(PSL1GHT)/include
+DEFINCS		:= -I$(BASEDIR) -I$(PSL1GHT)/target/include
 INCLUDES	:= $(DEFINCS) 
 
 MACHDEP		:= -DBIGENDIAN 
@@ -49,15 +49,15 @@ libogg.a: $(LIBOGG)
 install: libogg.a 
 #---------------------------------------------------------------------------------
 	@echo "[CP]  libogg.a"
-	@cp -f libogg.a $(PSL1GHT)/lib/
+	@cp -f libogg.a $(PSL1GHT)/target/lib/
 	@echo "[MKDIR] include/ogg"
-	@mkdir -p  $(PSL1GHT)/include/ogg
+	@mkdir -p  $(PSL1GHT)/target/include/ogg
 	@echo "[CP]  include/ogg"
-	@cp -f ogg/*.h $(PSL1GHT)/include/ogg/
+	@cp -f ogg/*.h $(PSL1GHT)/target/include/ogg/
 	@echo "[MKDIR] include/vorbis"
-	@mkdir -p  $(PSL1GHT)/include/vorbis
+	@mkdir -p  $(PSL1GHT)/target/include/vorbis
 	@echo "[CP]  include/vorbis"
-	@cp -f vorbis/*.h $(PSL1GHT)/include/vorbis/
+	@cp -f vorbis/*.h $(PSL1GHT)/target/include/vorbis/
 	@rm -f *.d
 	@rm -f *.o
 	@rm -f *.a

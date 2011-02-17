@@ -24,7 +24,7 @@ endif
 #---------------------------------------------------------------------------------
 
 DEPSDIR		 = .
-DEFINCS		:= -I. -I$(BASEDIR) -I$(PSL1GHT)/include
+DEFINCS		:= -I. -I$(BASEDIR) -I$(PSL1GHT)/target/include
 INCLUDES	:= $(DEFINCS)
 
 MACHDEP		:= -DBIGENDIAN
@@ -45,9 +45,9 @@ libmpg123.a: $(MPG123LIB)
 install: libmpg123.a
 #---------------------------------------------------------------------------------
 	@echo "[CP]  libmpg123.a"
-	@cp -f libmpg123.a $(PSL1GHT)/lib/
+	@cp -f libmpg123.a $(PSL1GHT)/target/lib/
 	@echo "[CP]  include"
-	@cp -f mpg123.h $(PSL1GHT)/include/
+	@cp -f mpg123.h $(PSL1GHT)/target/include/
 	@rm -f *.d
 	@rm -f *.o
 	@rm -f *.a

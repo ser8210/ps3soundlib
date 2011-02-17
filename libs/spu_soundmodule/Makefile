@@ -3,7 +3,7 @@ ifeq ($(strip $(PSL1GHT)),)
 $(error "PSL1GHT must be set in the environment.")
 endif
 
-include $(PSL1GHT)/Makefile.base
+include $(PSL1GHT)/host/spu.mk
 
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
@@ -15,13 +15,6 @@ LIBS		:=	-lc
 CFLAGS		:=	-g -O2 -Wall --std=gnu99
 CXXFLAGS	:=	-g -O2 -Wall
 LDFLAGS		:=	
-
-PREFIX		:= spu-
-AR		:= $(PREFIX)ar
-AS		:= $(PREFIX)gcc
-CC		:= $(PREFIX)gcc
-CXX		:= $(PREFIX)g++
-LD		:= $(CC)
 
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 
@@ -51,14 +44,16 @@ $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 	@[ -d lib ] || mkdir -p lib
-	@$(RAW2H) $(TARGET).elf lib/$(TARGET).h lib/$(TARGET).S $(TARGET)_bin
+	@$(RAW2H) $(TARGET).elf lib/$(TARGET).bin.h lib/$(TARGET).S $(TARGET)_bin
 	@ppu-as -mcell lib/$(TARGET).S -o lib/$(TARGET).o
-	@ppu-ar -rcs $(TARGET).a lib/$(TARGET).o
+	@ppu-ar -rcs $(TARGET).bin.a lib/$(TARGET).o
 
 install: $(OUTPUT).elf
+	
 	@[ -d $(PSL1GHT)/modules ] || mkdir -p $(PSL1GHT)/modules
-	@cp lib/*.h $(PSL1GHT)/modules
-	@cp $< $(PSL1GHT)/modules/$(TARGET)
+	@cp -f lib/*.h $(PSL1GHT)/modules
+	@cp -f lib/../*.a $(PSL1GHT)/modules
+	@cp -f $< $(PSL1GHT)/modules/$(TARGET).bin
 
 clean:
 	@echo Clean...

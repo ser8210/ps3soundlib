@@ -25,7 +25,7 @@ endif
 #---------------------------------------------------------------------------------
 
 DEPSDIR		 = .
-DEFINCS		:= -I$(BASEDIR) -I$(PSL1GHT)/include -I../spu_soundlib -I../libmpg123 -I../libogg-1.2.1
+DEFINCS		:= -I$(BASEDIR) -I$(PSL1GHT)/target/include -I../spu_soundlib -I../libmpg123 -I../libogg-1.2.1
 INCLUDES	:= $(DEFINCS) 
 
 MACHDEP		:= -DBIGENDIAN 
@@ -64,11 +64,11 @@ liboggplayer.a: $(OGGPLAYERLIB)
 install: libaudioplayer.a liboggplayer.a
 #---------------------------------------------------------------------------------
 	@echo "[CP]  libaudioplayer.a"
-	@cp -f libaudioplayer.a $(PSL1GHT)/lib/
-	@cp -f audioplayer.h $(PSL1GHT)/include/
+	@cp -f libaudioplayer.a $(PSL1GHT)/target/lib/
+	@cp -f audioplayer.h $(PSL1GHT)/target/include/
 	@echo "[CP]  liboggplayer.a"
-	@cp -f liboggplayer.a $(PSL1GHT)/lib/
-	@cp -f audioplayer.h $(PSL1GHT)/include/
+	@cp -f liboggplayer.a $(PSL1GHT)/target/lib/
+	@cp -f audioplayer.h $(PSL1GHT)/target/include/
 	@rm -f *.d .d
 	@rm -f $(OGGPLAYERLIB)
 	@rm -f audioplayer.o

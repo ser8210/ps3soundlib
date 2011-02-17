@@ -25,7 +25,7 @@ endif
 #---------------------------------------------------------------------------------
 
 DEPSDIR		 = .
-DEFINCS		:= -I$(BASEDIR) -I$(PSL1GHT)/include
+DEFINCS		:= -I$(BASEDIR) -I$(PSL1GHT)/target/include
 INCLUDES	:= $(DEFINCS) 
 
 MACHDEP		:= -DBIGENDIAN 
@@ -51,8 +51,8 @@ libspu_sound.a: $(SPUSOUNDLIB)
 install: libspu_sound.a
 #---------------------------------------------------------------------------------
 	@echo "[CP]  $(notdir $@)"
-	@cp -f  libspu_sound.a $(PSL1GHT)/lib/
-	@cp -f  spu_soundlib.h $(PSL1GHT)/include/
+	@cp -f  libspu_sound.a $(PSL1GHT)/target/lib/
+	@cp -f  spu_soundlib.h $(PSL1GHT)/target/include/
 	@rm -f *.d
 	@rm -f $(SPUSOUNDLIB)
 	@rm -f *.a
